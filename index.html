@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VedAI – Decoding Ancient Wisdom through Artificial Intelligence</title>
+    
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- REMOVED Tone.js as we are using HTML5 Audio now -->
+
+    <!-- Custom Styles and Configurations --><style>
+        /* Define custom properties for easy theme management */
+        :root {
+            --color-bg: #1b1b1b;
+            --color-text: #e8d9b5;
+            --color-primary: #c49b3a;
+            --color-primary-glow: rgba(196, 155, 58, 0.2);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            /* Subtle Sanskrit texture background */
+            background-image:
+                radial-gradient(rgba(27, 27, 27, 0) 50%, var(--color-bg)),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3Cstyle%3E.s%7Bstroke:%23333;stroke-width:0.5;opacity:0.2;%7D%3C/style%3E%3C/defs%3E%3Ctext x='10' y='20' font-family='Sanskrit Text' font-size='14' class='s'%3Eॐ%3C/text%3E%3Ctext x='70' y='80' font-family='Sanskrit Text' font-size='14' class='s'%3Eज्ञान%3C/text%3E%3Ctext x='30' y='110' font-family='Sanskrit Text' font-size='14' class='s'%3Eवेद%3C/text%3E%3Ctext x='90' y='40' font-family='Sanskrit Text' font-size='14' class='s'%3Eसत्य%3C/text%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+
+        .hero-title {
+            text-shadow: 0 0 15px var(--color-primary-glow), 0 0 25px var(--color-primary-glow);
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+
+        .hero-title:hover {
+            transform: scale(1.03);
+            text-shadow: 0 0 20px var(--color-primary-glow), 0 0 35px var(--color-primary-glow), 0 0 50px rgba(196, 155, 58, 0.3);
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px 0 var(--color-primary-glow);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-bg);
+        }
+
+        .btn-primary:hover {
+            background-color: #dcb34a;
+            box-shadow: 0 0 20px 5px var(--color-primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary-glow);
+            box-shadow: 0 0 20px 5px var(--color-primary-glow);
+            transform: translateY(-2px);
+        }
+        
+        /* Navlink hover effect */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 50%;
+            background-color: var(--color-primary);
+            transition: all 0.3s ease-out;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Scroll reveal animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Glassmorphism effect for cards */
+        .glass-card {
+            background: rgba(232, 217, 181, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 217, 181, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(232, 217, 181, 0.1);
+            border: 1px solid rgba(232, 217, 181, 0.2);
+            transform: translateY(-5px);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Raised z-index to be above floating text */
+            opacity: 0.3;
+        }
+
+        /* --- Floating Shlokas Animation --- */
+        #floating-shlokas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #floating-shlokas-container span {
+            position: absolute;
+            bottom: -200px; /* Start from well below the screen */
+            color: var(--color-text);
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            user-select: none;
+            white-space: nowrap;
+            animation: floatText 20s linear infinite;
+        }
+
+        @keyframes floatText {
+            from { transform: translateY(0vh) translateX(0vw); opacity: 0; }
+            20% { opacity: 0.15; }
+            80% { opacity: 0.15; }
+            to { transform: translateY(-120vh) translateX(10vw); opacity: 0; }
+        }
+        
+        @keyframes floatText2 {
+            from { transform: translateY(0vh) translateX(0vw); opacity: 0; }
+            20% { opacity: 0.15; }
+            80% { opacity: 0.15; }
+            to { transform: translateY(-120vh) translateX(-10vw); opacity: 0; }
+        }
+
+        #floating-shlokas-container span:nth-child(1) { left: 5%; font-size: 1.2rem; animation-duration: 35s; animation-delay: 0s; }
+        #floating-shlokas-container span:nth-child(2) { left: 25%; font-size: 1.5rem; animation-duration: 28s; animation-delay: 0.3s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(3) { left: 85%; font-size: 1.1rem; animation-duration: 40s; animation-delay: 0.1s; }
+        #floating-shlokas-container span:nth-child(4) { left: 45%; font-size: 1.6rem; animation-duration: 25s; animation-delay: 0.8s; }
+        #floating-shlokas-container span:nth-child(5) { left: 65%; font-size: 1.3rem; animation-duration: 33s; animation-delay: 0.5s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(6) { left: 15%; font-size: 1.4rem; animation-duration: 29s; animation-delay: 1.2s; }
+        #floating-shlokas-container span:nth-child(7) { left: 75%; font-size: 1.2rem; animation-duration: 38s; animation-delay: 1.5s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(8) { left: 55%; font-size: 1.5rem; animation-duration: 26s; animation-delay: 0.2s; }
+        #floating-shlokas-container span:nth-child(9) { left: 35%; font-size: 1.1rem; animation-duration: 42s; animation-delay: 1.0s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(10){ left: 90%; font-size: 1.4rem; animation-duration: 31s; animation-delay: 0.6s; }
+    
+        /* Spinner Animation */
+        .loader {
+            border: 4px solid rgba(232, 217, 181, 0.2);
+            border-left-color: var(--color-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Microphone listening animation */
+        #mic-button.listening svg {
+            color: #ef4444; /* red-500 */
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Music Toggle Button */
+        #music-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            background-color: rgba(232, 217, 181, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 217, 181, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #music-toggle:hover {
+            background-color: rgba(232, 217, 181, 0.2);
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Floating Shlokas Background -->
+    <div id="floating-shlokas-container">
+        <span>ॐ भूर्भुвः स्वः</span>
+        <span>तत्सवितुर्वरेण्यं</span>
+        <span>भर्गो देवस्य धीमहि</span>
+        <span>धियो यो नः प्रचोदयात्</span>
+        <span>सत्यमेव जयते</span>
+        <span>अहिंसा परमो धर्मः</span>
+        <span>ज्ञानं परमं बलम्</span>
+        <span>कर्मण्येवाधिकारस्ते</span>
+        <span>योगः कर्मसु कौशलम्</span>
+        <span>वसुधैव कुटुम्बकम्</span>
+    </div>
+    
+    <!-- Background Audio Player -->
+    <audio id="background-chant" loop>
+        <!-- A short, royalty-free Om chant embedded as Base64 data to avoid external file issues. New, working audio source. -->
+        <source src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlwAAAAAAAABLAGwAAAAAAAAAAAE0AAAAAAAAAEwuAAAAAAAAAABNACgAAAAAAAAAIEw6AAAAAAAAAABNAIgAAAAAAAAA/99DAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//tQwRAAEAAAA0AAAAAmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm-gloria dei filio benedicto spiritu sancto in saecula saeculorum amen et omni creaturae laus honor virtus et potestas in saecula saeculorum amen christus vincit christus regnat christus imperat ab omni malo te defendat deus pater et filius et spiritus sanctus amen in nomine patris et filii et spiritus sancti amen" type="audio/mp3">
+    </audio>
+
+    <!-- Header and Navbar --><header id="home" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a id="logo-link" href="#home" class="text-2xl font-bold" style="font-family: var(--font-heading); color: var(--color-primary);">VedAI</a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#demo" class="nav-link">Demo</a>
+                    <a href="#team" class="nav-link">Team</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col items-center space-y-4 glass-card p-4">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#team" class="nav-link">Team</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section --><section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+            <canvas id="hero-canvas"></canvas>
+            <div class="relative z-10 px-4">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold hero-title leading-tight" style="color: var(--color-text);">Decoding Ancient Wisdom through Artificial Intelligence</h1>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto" style="color: #e8d9b5e0;">Bridging timeless Vedic knowledge with modern science.</p>
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#features" class="btn btn-primary px-8 py-3 rounded-lg font-semibold text-lg">Explore Now</a>
+                    <a href="#demo" class="btn btn-secondary px-8 py-3 rounded-lg font-semibold text-lg">Try Prototype</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section --><section id="about" class="py-20 lg:py-32">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="scroll-reveal">
+                        <img src="pandit.jpg" alt="Symbolic representation of ancient text merging with AI technology" class="rounded-lg shadow-2xl mx-auto" style="box-shadow: 0 0 30px var(--color-primary-glow);">
+                    </div>
+                    <div class="scroll-reveal">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-4" style="color: var(--color-primary);">What is VedAI?</h2>
+                        <p class="text-lg leading-relaxed">
+                            VedAI is a pioneering platform dedicated to unraveling the profound wisdom embedded within ancient Vedic texts using state-of-the-art Artificial Intelligence. Our mission is to create a seamless bridge between past and present, making millennia-old knowledge accessible, searchable, and understandable to scholars, students, and enthusiasts worldwide. We leverage natural language processing and machine learning to analyze texts, reveal hidden patterns, and connect ancient philosophies with contemporary scientific principles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section --><section id="features" class="py-20 lg:py-32" style="background-color: #111;">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);">Core Features</h2>
+                <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal">Empowering research and discovery through technology.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature Card 1 --><div class="glass-card p-8 text-center scroll-reveal">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 20V10M18 20V4M6 20v-4"/><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">AI-Powered Decoding</h3>
+                        <p class="opacity-80">Utilize advanced algorithms to translate, interpret, and analyze complex Sanskrit verses with high accuracy.</p>
+                    </div>
+                    <!-- Feature Card 2 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 100ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Open Contribution</h3>
+                        <p class="opacity-80">A community-driven platform where scholars can contribute, validate, and enrich the knowledge base.</p>
+                    </div>
+                    <!-- Feature Card 3 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 200ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Modern Science Link</h3>
+                        <p class="opacity-80">Discover correlations between ancient concepts and modern scientific theories, from cosmology to consciousness.</p>
+                    </div>
+                    <!-- Feature Card 4 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Knowledge Network</h3>
+                        <p class="opacity-80">Explore an interconnected web of concepts, texts, and commentaries, visualized for intuitive understanding.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section --><section id="demo" class="py-20 lg:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);">Try the Prototype</h2>
+                <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal">Experience the power of VedAI. Get a live Hindi translation of any Sanskrit verse.</p>
+
+                <div class="max-w-2xl mx-auto scroll-reveal">
+                    <div class="flex items-center gap-2 bg-transparent border-2 border-gray-700 rounded-lg focus-within:border-primary focus-within:ring-2 focus-within:ring-primary-glow transition duration-300">
+                        <input id="demo-input" type="text" placeholder="Type or speak a Sanskrit verse..." class="w-full px-5 py-3 bg-transparent border-none focus:outline-none focus:ring-0">
+                        <button id="mic-button" title="Speak Verse" class="p-3 text-gray-400 hover:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        </button>
+                    </div>
+                    <p id="mic-status" class="mt-4 text-lg opacity-80 h-6"></p>
+                    <button id="demo-button" class="btn btn-primary px-8 py-3 rounded-lg font-semibold mt-4 w-full sm:w-auto">Translate</button>
+                </div>
+
+                <div id="demo-output" class="mt-8 max-w-3xl mx-auto text-left glass-card p-8 hidden">
+                    <div id="loading-spinner" class="hidden mx-auto loader"></div>
+                    <div id="translation-result" class="hidden">
+                        <h4 class="font-bold text-xl mb-4" style="color: var(--color-primary);">Translation Result:</h4>
+                        <div class="space-y-4">
+                             <p><strong class="font-semibold text-primary/80 block">Original Verse:</strong> <span id="output-verse" class="italic"></span></p>
+                            <p><strong class="font-semibold text-primary/80 block">Hindi Translation:</strong> <span id="output-translation" class="text-lg"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section --><section id="team" class="py-20 lg:py-32" style="background-color: #111;">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-12 scroll-reveal" style="color: var(--color-primary);">Our Team</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <!-- Team Member 1 (Yash) --><div class="text-center scroll-reveal">
+                        <img src="ysh.png" alt="Yash's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 object-cover object-center" style="border-color: var(--color-primary);">
+                        <h3 class="text-xl font-bold">Yash</h3>
+                        <p class="opacity-80">Team Leader</p>
+                    </div>
+                     <!-- Team Member 2 (Aradhana) --><div class="text-center scroll-reveal" style="transition-delay: 100ms;">
+                        <img src="https://placehold.co/200x200/e8d9b5/1b1b1b?text=A" alt="Aradhana's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                        <h3 class="text-xl font-bold">Aradhana</h3>
+                        <p class="opacity-80">Team Member</p>
+                    </div>
+                     <!-- Team Member 3 (Hasan Saifi) --><div class="text-center scroll-reveal" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/200x200/e8d9b5/1b1b1b?text=HS" alt="Hasan Saifi's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                        <h3 class="text-xl font-bold">Hasan Saifi</h3>
+                        <p class="opacity-80">Team Member</p>
+                    </div>
+                     <!-- Team Member 4 (Prince Kumar) --><div class="text-center scroll-reveal" style="transition-delay: 300ms;">
+                        <img src="https://placehold.co/200x200/e8d9b5/1b1b1b?text=PK" alt="Prince Kumar's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                        <h3 class="text-xl font-bold">Prince Kumar</h3>
+                        <p class="opacity-80">Team Member</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer --><footer id="contact" class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- IMPORTANT: Replace with your actual email address -->
+                <a href="mailto:yash.engineer06@gmail.com" class="hover:text-primary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+                <!-- IMPORTANT: Replace with your actual LinkedIn profile URL -->
+                <a href="https://www.linkedin.com/in/yash-62449832a/" target="_blank" class="hover:text-primary transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-sm opacity-70">
+                <p class="text-center sm:text-left">&copy; 2025 VedAI Project. All Rights Reserved.</p>
+                <p class="mt-4 sm:mt-0">Made by Yash</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Music Toggle Button -->
+    <button id="music-toggle" title="Toggle Music">
+        <!-- Speaker Off Icon -->
+        <svg id="speaker-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        <!-- Speaker On Icon -->
+        <svg id="speaker-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+    </button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Logo Refresh on Click ---
+            const logoLink = document.getElementById('logo-link');
+            logoLink.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevents scrolling to #home
+                window.location.reload();
+            });
+            
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // --- Navbar scroll effect ---
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(27, 27, 27, 0.8)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.backgroundColor = 'transparent';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+            
+            // --- Scroll Reveal Animation ---
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (
+                    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+                );
+            };
+            const displayScrollElement = (element) => {
+                element.classList.add('visible');
+            };
+            
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        displayScrollElement(el);
+                    }
+                });
+            }
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+            });
+            // Trigger on load
+            handleScrollAnimation();
+
+            // --- Demo Section Logic (Simplified) ---
+            const demoButton = document.getElementById('demo-button');
+            const demoInput = document.getElementById('demo-input');
+            const demoOutput = document.getElementById('demo-output');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const translationResult = document.getElementById('translation-result');
+            const outputVerse = document.getElementById('output-verse');
+            const outputTranslation = document.getElementById('output-translation');
+
+            async function performTranslation() {
+                const inputText = demoInput.value.trim();
+                if (!inputText) {
+                    alert("Please enter or speak a Sanskrit verse to translate.");
+                    return;
+                }
+
+                demoOutput.classList.remove('hidden');
+                loadingSpinner.classList.remove('hidden');
+                translationResult.classList.add('hidden');
+                
+                try {
+                    const apiUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(inputText)}&langpair=sa|hi`;
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error('Network response was not ok.');
+                    const data = await response.json();
+
+                    if (data.responseData && data.responseStatus === 200) {
+                        outputVerse.textContent = `"${inputText}"`;
+                        outputTranslation.textContent = data.responseData.translatedText;
+                    } else {
+                        throw new Error('Translation failed.');
+                    }
+                } catch (error) {
+                    console.error("Translation Error:", error);
+                    outputVerse.textContent = `"${inputText}"`;
+                    outputTranslation.textContent = "Sorry, we couldn't translate this verse at the moment. Please try again.";
+                } finally {
+                    loadingSpinner.classList.add('hidden');
+                    translationResult.classList.remove('hidden');
+                }
+            }
+
+            demoButton.addEventListener('click', performTranslation);
+
+            // --- Voice Recognition Logic ---
+            const micButton = document.getElementById('mic-button');
+            const micStatus = document.getElementById('mic-status');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (SpeechRecognition) {
+                const recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.lang = 'sa-IN';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                micButton.addEventListener('click', () => recognition.start());
+                recognition.onstart = () => {
+                    micStatus.textContent = "Listening...";
+                    micButton.classList.add('listening');
+                };
+                recognition.onresult = (event) => {
+                    demoInput.value = event.results[0][0].transcript;
+                    performTranslation(); 
+                };
+                recognition.onspeechend = () => recognition.stop();
+                recognition.onend = () => {
+                    micStatus.textContent = "";
+                    micButton.classList.remove('listening');
+                };
+                recognition.onerror = (event) => {
+                    micStatus.textContent = `Error: ${event.error}. Check mic permissions.`;
+                    micButton.classList.remove('listening');
+                };
+            } else {
+                micButton.style.display = 'none';
+                micStatus.textContent = "Sorry, your browser doesn't support voice recognition.";
+            }
+
+            // --- Background Music Logic ---
+            const musicToggle = document.getElementById('music-toggle');
+            const speakerOn = document.getElementById('speaker-on');
+            const speakerOff = document.getElementById('speaker-off');
+            const chantAudio = document.getElementById('background-chant');
+
+            const playAudio = async () => {
+                // Check if audio is already playing to avoid interruption errors
+                if (chantAudio.paused) {
+                    try {
+                        await chantAudio.play();
+                        speakerOn.classList.remove('hidden');
+                        speakerOff.classList.add('hidden');
+                    } catch (err) {
+                        // This error is expected if autoplay is blocked
+                        console.log("Autoplay was prevented. User must interact to start audio.", err);
+                        speakerOn.classList.add('hidden');
+                        speakerOff.classList.remove('hidden');
+                    }
+                }
+            };
+
+            const pauseAudio = () => {
+                chantAudio.pause();
+                speakerOn.classList.add('hidden');
+                speakerOff.classList.remove('hidden');
+            };
+
+            musicToggle.addEventListener('click', () => {
+                if (chantAudio.paused) {
+                    playAudio();
+                } else {
+                    pauseAudio();
+                }
+            });
+
+            // We no longer attempt to autoplay here, as it's unreliable.
+            // The user must click the toggle button to start the music.
+            // So we remove the line: playAudio();
+
+
+            // --- Hero Canvas Animation ---
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 1.5 + 0.5;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = '#c49b3a';
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            initParticles();
+            
+            function connectParticles() {
+                let opacityValue = 1;
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        let distance = Math.sqrt(
+                            (particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)
+                            + (particles[a].y - particles[b].y) * (particles[a].y - particles[b].y)
+                        );
+
+                        if (distance < 100) {
+                            opacityValue = 1 - (distance / 100);
+                            ctx.strokeStyle = 'rgba(196, 155, 58, ' + opacityValue + ')';
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                connectParticles();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        });
+    </script>
+
+</body>
+</html>
+
+
+
