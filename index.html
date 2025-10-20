@@ -11,10 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- REMOVED Tone.js as we are using HTML5 Audio now -->
-
-    <!-- Custom Styles and Configurations --><style>
-        /* Define custom properties for easy theme management */
+    <!-- Inlined CSS --><style>
+        /* Define custom properties for easy theme management - OLD GOLD/BEIGE THEME */
         :root {
             --color-bg: #1b1b1b;
             --color-text: #e8d9b5;
@@ -22,6 +20,11 @@
             --color-primary-glow: rgba(196, 155, 58, 0.2);
             --font-heading: 'Cinzel', serif;
             --font-body: 'Poppins', sans-serif;
+        }
+
+        /* Hide default cursor */
+        html, body, a, button {
+            cursor: none;
         }
 
         body {
@@ -74,7 +77,7 @@
             box-shadow: 0 0 20px 5px var(--color-primary-glow);
             transform: translateY(-2px);
         }
-        
+
         /* Navlink hover effect */
         .nav-link {
             position: relative;
@@ -96,7 +99,7 @@
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         /* Scroll reveal animation */
         .scroll-reveal {
             opacity: 0;
@@ -108,7 +111,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Glassmorphism effect for cards */
         .glass-card {
             background: rgba(232, 217, 181, 0.05);
@@ -164,7 +167,7 @@
             80% { opacity: 0.15; }
             to { transform: translateY(-120vh) translateX(10vw); opacity: 0; }
         }
-        
+
         @keyframes floatText2 {
             from { transform: translateY(0vh) translateX(0vw); opacity: 0; }
             20% { opacity: 0.15; }
@@ -172,17 +175,17 @@
             to { transform: translateY(-120vh) translateX(-10vw); opacity: 0; }
         }
 
-        #floating-shlokas-container span:nth-child(1) { left: 5%; font-size: 1.2rem; animation-duration: 35s; animation-delay: 0s; }
-        #floating-shlokas-container span:nth-child(2) { left: 25%; font-size: 1.5rem; animation-duration: 28s; animation-delay: 0.3s; animation-name: floatText2; }
-        #floating-shlokas-container span:nth-child(3) { left: 85%; font-size: 1.1rem; animation-duration: 40s; animation-delay: 0.1s; }
-        #floating-shlokas-container span:nth-child(4) { left: 45%; font-size: 1.6rem; animation-duration: 25s; animation-delay: 0.8s; }
-        #floating-shlokas-container span:nth-child(5) { left: 65%; font-size: 1.3rem; animation-duration: 33s; animation-delay: 0.5s; animation-name: floatText2; }
-        #floating-shlokas-container span:nth-child(6) { left: 15%; font-size: 1.4rem; animation-duration: 29s; animation-delay: 1.2s; }
-        #floating-shlokas-container span:nth-child(7) { left: 75%; font-size: 1.2rem; animation-duration: 38s; animation-delay: 1.5s; animation-name: floatText2; }
-        #floating-shlokas-container span:nth-child(8) { left: 55%; font-size: 1.5rem; animation-duration: 26s; animation-delay: 0.2s; }
-        #floating-shlokas-container span:nth-child(9) { left: 35%; font-size: 1.1rem; animation-duration: 42s; animation-delay: 1.0s; animation-name: floatText2; }
-        #floating-shlokas-container span:nth-child(10){ left: 90%; font-size: 1.4rem; animation-duration: 31s; animation-delay: 0.6s; }
-    
+        #floating-shlokas-container span:nth-child(1) { left: 5%; font-size: 1.2rem; animation-duration: 55s; animation-delay: 0s; }
+        #floating-shlokas-container span:nth-child(2) { left: 25%; font-size: 1.5rem; animation-duration: 48s; animation-delay: 0.3s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(3) { left: 85%; font-size: 1.1rem; animation-duration: 60s; animation-delay: 0.1s; }
+        #floating-shlokas-container span:nth-child(4) { left: 45%; font-size: 1.6rem; animation-duration: 45s; animation-delay: 0.8s; }
+        #floating-shlokas-container span:nth-child(5) { left: 65%; font-size: 1.3rem; animation-duration: 53s; animation-delay: 0.5s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(6) { left: 15%; font-size: 1.4rem; animation-duration: 49s; animation-delay: 1.2s; }
+        #floating-shlokas-container span:nth-child(7) { left: 75%; font-size: 1.2rem; animation-duration: 58s; animation-delay: 1.5s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(8) { left: 55%; font-size: 1.5rem; animation-duration: 46s; animation-delay: 0.2s; }
+        #floating-shlokas-container span:nth-child(9) { left: 35%; font-size: 1.1rem; animation-duration: 62s; animation-delay: 1.0s; animation-name: floatText2; }
+        #floating-shlokas-container span:nth-child(10){ left: 90%; font-size: 1.4rem; animation-duration: 51s; animation-delay: 0.6s; }
+
         /* Spinner Animation */
         .loader {
             border: 4px solid rgba(232, 217, 181, 0.2);
@@ -207,33 +210,56 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-
-        /* Music Toggle Button */
-        #music-toggle {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            z-index: 100;
-            background-color: rgba(232, 217, 181, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(232, 217, 181, 0.2);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        
+        /* Modal Styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
         }
-        #music-toggle:hover {
-            background-color: rgba(232, 217, 181, 0.2);
-            transform: scale(1.1);
+        .modal-container {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        /* Custom Cursor Styles */
+        #custom-cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease-out;
+        }
+
+        #custom-cursor-outline {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--color-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.3s ease-out;
+        }
+
+        #custom-cursor-outline.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: var(--color-primary-glow);
+        }
+        #custom-cursor-dot.hover {
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0.5;
         }
 
     </style>
 </head>
 <body class="antialiased">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-outline"></div>
 
     <!-- Floating Shlokas Background -->
     <div id="floating-shlokas-container">
@@ -251,194 +277,417 @@
     
     <!-- Background Audio Player -->
     <audio id="background-chant" loop>
-        <!-- A short, royalty-free Om chant embedded as Base64 data to avoid external file issues. New, working audio source. -->
-        <source src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlwAAAAAAAABLAGwAAAAAAAAAAAE0AAAAAAAAAEwuAAAAAAAAAABNACgAAAAAAAAAIEw6AAAAAAAAAABNAIgAAAAAAAAA/99DAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//tQwRAAEAAAA0AAAAAmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm-gloria dei filio benedicto spiritu sancto in saecula saeculorum amen et omni creaturae laus honor virtus et potestas in saecula saeculorum amen christus vincit christus regnat christus imperat ab omni malo te defendat deus pater et filius et spiritus sanctus amen in nomine patris et filii et spiritus sancti amen" type="audio/mp3">
+        <source src="data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjQ1LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlwAAAAAAAABLAGwAAAAAAAAAAAE0AAAAAAAAAEwuAAAAAAAAAABNACgAAAAAAAAAIEw6AAAAAAAAAABNAIgAAAAAAAAA/99DAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//tQwRAAEAAAA0AAAAAmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm-gloria dei filio benedicto spiritu sancto in saecula saeculorum amen et omni creaturae laus honor virtus et potestas in saecula saeculorum amen christus vincit christus regnat christus imperat ab omni malo te defendat deus pater et filius et spiritus sanctus amen in nomine patris et filii et spiritus sancti amen" type="audio/mp3">
     </audio>
 
-    <!-- Header and Navbar --><header id="home" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a id="logo-link" href="#home" class="text-2xl font-bold" style="font-family: var(--font-heading); color: var(--color-primary);">VedAI</a>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#demo" class="nav-link">Demo</a>
-                    <a href="#team" class="nav-link">Team</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </div>
-
-                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
-            </div>
-
-            <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col items-center space-y-4 glass-card p-4">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#demo" class="nav-link">Demo</a>
-                <a href="#team" class="nav-link">Team</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section --><section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-            <canvas id="hero-canvas"></canvas>
-            <div class="relative z-10 px-4">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold hero-title leading-tight" style="color: var(--color-text);">Decoding Ancient Wisdom through Artificial Intelligence</h1>
-                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto" style="color: #e8d9b5e0;">Bridging timeless Vedic knowledge with modern science.</p>
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#features" class="btn btn-primary px-8 py-3 rounded-lg font-semibold text-lg">Explore Now</a>
-                    <a href="#demo" class="btn btn-secondary px-8 py-3 rounded-lg font-semibold text-lg">Try Prototype</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section --><section id="about" class="py-20 lg:py-32">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="scroll-reveal">
-                        <img src="pandit.jpg" alt="Symbolic representation of ancient text merging with AI technology" class="rounded-lg shadow-2xl mx-auto" style="box-shadow: 0 0 30px var(--color-primary-glow);">
+    <!-- Page Wrapper -->
+    <div class="flex flex-col min-h-screen">
+        <!-- Header Container -->
+        <div class="fixed top-0 left-0 right-0 z-50">
+            <!-- Top Bar -->
+            <div class="bg-black/30 backdrop-blur-sm text-sm text-white/80">
+                <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <a href="mailto:info@vedai.com" class="flex items-center gap-2 hover:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>yash.engineer06@gmail.com</span>
+                        </a>
+                        <span class="hidden sm:inline-flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span>+91-9821026940</span>
+                        </span>
                     </div>
-                    <div class="scroll-reveal">
-                        <h2 class="text-3xl lg:text-4xl font-bold mb-4" style="color: var(--color-primary);">What is VedAI?</h2>
-                        <p class="text-lg leading-relaxed">
-                            VedAI is a pioneering platform dedicated to unraveling the profound wisdom embedded within ancient Vedic texts using state-of-the-art Artificial Intelligence. Our mission is to create a seamless bridge between past and present, making millennia-old knowledge accessible, searchable, and understandable to scholars, students, and enthusiasts worldwide. We leverage natural language processing and machine learning to analyze texts, reveal hidden patterns, and connect ancient philosophies with contemporary scientific principles.
-                        </p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" id="login-button" class="flex items-center gap-1 hover:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span data-key="login">LOGIN</span>
+                        </a>
+                        <span class="opacity-50">|</span>
+                        <a href="#" id="register-button" class="hover:text-primary transition-colors" data-key="register">REGISTER</a>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Features Section --><section id="features" class="py-20 lg:py-32" style="background-color: #111;">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);">Core Features</h2>
-                <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal">Empowering research and discovery through technology.</p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Feature Card 1 --><div class="glass-card p-8 text-center scroll-reveal">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 20V10M18 20V4M6 20v-4"/><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">AI-Powered Decoding</h3>
-                        <p class="opacity-80">Utilize advanced algorithms to translate, interpret, and analyze complex Sanskrit verses with high accuracy.</p>
-                    </div>
-                    <!-- Feature Card 2 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 100ms;">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Open Contribution</h3>
-                        <p class="opacity-80">A community-driven platform where scholars can contribute, validate, and enrich the knowledge base.</p>
-                    </div>
-                    <!-- Feature Card 3 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 200ms;">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Modern Science Link</h3>
-                        <p class="opacity-80">Discover correlations between ancient concepts and modern scientific theories, from cosmology to consciousness.</p>
-                    </div>
-                    <!-- Feature Card 4 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 300ms;">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Knowledge Network</h3>
-                        <p class="opacity-80">Explore an interconnected web of concepts, texts, and commentaries, visualized for intuitive understanding.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Demo Section --><section id="demo" class="py-20 lg:py-32">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);">Try the Prototype</h2>
-                <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal">Experience the power of VedAI. Get a live Hindi translation of any Sanskrit verse.</p>
-
-                <div class="max-w-2xl mx-auto scroll-reveal">
-                    <div class="flex items-center gap-2 bg-transparent border-2 border-gray-700 rounded-lg focus-within:border-primary focus-within:ring-2 focus-within:ring-primary-glow transition duration-300">
-                        <input id="demo-input" type="text" placeholder="Type or speak a Sanskrit verse..." class="w-full px-5 py-3 bg-transparent border-none focus:outline-none focus:ring-0">
-                        <button id="mic-button" title="Speak Verse" class="p-3 text-gray-400 hover:text-primary transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                        </button>
-                    </div>
-                    <p id="mic-status" class="mt-4 text-lg opacity-80 h-6"></p>
-                    <button id="demo-button" class="btn btn-primary px-8 py-3 rounded-lg font-semibold mt-4 w-full sm:w-auto">Translate</button>
-                </div>
-
-                <div id="demo-output" class="mt-8 max-w-3xl mx-auto text-left glass-card p-8 hidden">
-                    <div id="loading-spinner" class="hidden mx-auto loader"></div>
-                    <div id="translation-result" class="hidden">
-                        <h4 class="font-bold text-xl mb-4" style="color: var(--color-primary);">Translation Result:</h4>
-                        <div class="space-y-4">
-                             <p><strong class="font-semibold text-primary/80 block">Original Verse:</strong> <span id="output-verse" class="italic"></span></p>
-                            <p><strong class="font-semibold text-primary/80 block">Hindi Translation:</strong> <span id="output-translation" class="text-lg"></span></p>
+            <!-- Main Navigation -->
+            <header id="main-header" class="transition-all duration-300">
+                <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+                    <a id="logo-link" href="#home" class="text-2xl font-bold" style="font-family: var(--font-heading); color: var(--color-primary);">VedAI</a>
+                    
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="#home" class="nav-link" data-key="nav-home">Home</a>
+                        <a href="#about" class="nav-link" data-key="nav-about">About</a>
+                        <a href="#features" class="nav-link" data-key="nav-features">Features</a>
+                        <a href="#demo" class="nav-link" data-key="nav-demo">Demo</a>
+                        <a href="#team" class="nav-link" data-key="nav-team">Team</a>
+                        <a href="#contact" class="nav-link" data-key="nav-contact">Contact</a>
+                        
+                        <!-- Language Selector -->
+                        <div class="relative">
+                            <button id="language-selector-button" class="flex items-center border border-gray-700 px-3 py-1 rounded-md hover:border-primary transition-colors">
+                                <span id="selected-language-text">English</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <div id="language-options" class="absolute right-0 mt-2 w-32 bg-black/50 backdrop-blur-lg border border-gray-700 rounded-md shadow-lg hidden">
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-primary/20" data-lang="en">English</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-primary/20" data-lang="hi">हिन्दी</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-primary/20" data-lang="sa">संस्कृतम्</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Team Section --><section id="team" class="py-20 lg:py-32" style="background-color: #111;">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl lg:text-4xl font-bold mb-12 scroll-reveal" style="color: var(--color-primary);">Our Team</h2>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <!-- Team Member 1 (Yash) --><div class="text-center scroll-reveal">
-                        <img src="ysh.png" alt="Yash's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 object-cover object-center" style="border-color: var(--color-primary);">
-                        <h3 class="text-xl font-bold">Yash</h3>
-                        <p class="opacity-80">Team Leader</p>
-                    </div>
-                     <!-- Team Member 2 (Aradhana) --><div class="text-center scroll-reveal" style="transition-delay: 100ms;">
-                        <img src="aaru.jpg" alt="Aradhana's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
-                        <h3 class="text-xl font-bold">Aradhana</h3>
-                        <p class="opacity-80">Team Member</p>
-                    </div>
-                     <!-- Team Member 3 (Hasan Saifi) --><div class="text-center scroll-reveal" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/200x200/e8d9b5/1b1b1b?text=HS" alt="Hasan Saifi's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
-                        <h3 class="text-xl font-bold">Hasan Saifi</h3>
-                        <p class="opacity-80">Team Member</p>
-                    </div>
-                     <!-- Team Member 4 (Prince Kumar) --><div class="text-center scroll-reveal" style="transition-delay: 300ms;">
-                        <img src="https://placehold.co/200x200/e8d9b5/1b1b1b?text=PK" alt="Prince Kumar's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
-                        <h3 class="text-xl font-bold">Prince Kumar</h3>
-                        <p class="opacity-80">Team Member</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+                    <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </nav>
+            </header>
+        </div>
 
-    <!-- Footer --><footer id="contact" class="py-12">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-center space-x-6 mb-6">
-                <!-- IMPORTANT: Replace with your actual email address -->
-                <a href="mailto:yash.engineer06@gmail.com" class="hover:text-primary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </a>
-                <!-- IMPORTANT: Replace with your actual LinkedIn profile URL -->
-                <a href="https://www.linkedin.com/in/yash-62449832a/" target="_blank" class="hover:text-primary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-sm opacity-70">
-                <p class="text-center sm:text-left">&copy; 2025 VedAI Project. All Rights Reserved.</p>
-                <p class="mt-4 sm:mt-0">Made by Yash</p>
+        <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black/80 backdrop-blur-lg z-40 pt-32">
+             <div class="flex flex-col items-center space-y-6 text-xl">
+                <a href="#home" class="nav-link" data-key="nav-home-mob">Home</a>
+                <a href="#about" class="nav-link" data-key="nav-about-mob">About</a>
+                <a href="#features" class="nav-link" data-key="nav-features-mob">Features</a>
+                <a href="#demo" class="nav-link" data-key="nav-demo-mob">Demo</a>
+                <a href="#team" class="nav-link" data-key="nav-team-mob">Team</a>
+                <a href="#contact" class="nav-link" data-key="nav-contact-mob">Contact</a>
             </div>
         </div>
-    </footer>
+
+        <main id="home">
+            <!-- Hero Section --><section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+                <canvas id="hero-canvas"></canvas>
+                <div class="relative z-10 px-4">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold hero-title leading-tight" style="color: var(--color-text);" data-key="hero-title">Decoding Ancient Wisdom through Artificial Intelligence</h1>
+                    <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto" style="color: #e8d9b5e0;" data-key="hero-subtitle">Bridging timeless Vedic knowledge with modern science.</p>
+                    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="#features" class="btn btn-primary px-8 py-3 rounded-lg font-semibold text-lg" data-key="explore-btn">Explore Now</a>
+                        <a href="#demo" class="btn btn-secondary px-8 py-3 rounded-lg font-semibold text-lg" data-key="prototype-btn">Try Prototype</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section --><section id="about" class="py-20 lg:py-32">
+                <div class="container mx-auto px-6">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="scroll-reveal">
+                            <img src="pandit.jpg" alt="Symbolic representation of ancient text merging with AI technology" class="rounded-lg shadow-2xl mx-auto" style="box-shadow: 0 0 30px var(--color-primary-glow);">
+                        </div>
+                        <div class="scroll-reveal">
+                            <h2 class="text-3xl lg:text-4xl font-bold mb-4" style="color: var(--color-primary);" data-key="about-title">What is VedAI?</h2>
+                            <p class="text-lg leading-relaxed" data-key="about-para">
+                                VedAI is a pioneering platform dedicated to unraveling the profound wisdom embedded within ancient Vedic texts using state-of-the-art Artificial Intelligence. Our mission is to create a seamless bridge between past and present, making millennia-old knowledge accessible, searchable, and understandable to scholars, students, and enthusiasts worldwide. We leverage natural language processing and machine learning to analyze texts, reveal hidden patterns, and connect ancient philosophies with contemporary scientific principles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section --><section id="features" class="py-20 lg:py-32" style="background-color: #111;">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);" data-key="features-title">Core Features</h2>
+                    <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal" data-key="features-subtitle">Empowering research and discovery through technology.</p>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Feature Card 1 --><div class="glass-card p-8 text-center scroll-reveal">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 20V10M18 20V4M6 20v-4"/><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2" data-key="feature1-title">AI-Powered Decoding</h3>
+                            <p class="opacity-80" data-key="feature1-desc">Utilize advanced algorithms to translate, interpret, and analyze complex Sanskrit verses with high accuracy.</p>
+                        </div>
+                        <!-- Feature Card 2 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 100ms;">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2" data-key="feature2-title">Open Contribution</h3>
+                            <p class="opacity-80" data-key="feature2-desc">A community-driven platform where scholars can contribute, validate, and enrich the knowledge base.</p>
+                        </div>
+                        <!-- Feature Card 3 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 200ms;">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"/><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2" data-key="feature3-title">Modern Science Link</h3>
+                            <p class="opacity-80" data-key="feature3-desc">Discover correlations between ancient concepts and modern scientific theories, from cosmology to consciousness.</p>
+                        </div>
+                        <!-- Feature Card 4 --><div class="glass-card p-8 text-center scroll-reveal" style="transition-delay: 300ms;">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full mx-auto mb-6" style="background-color: var(--color-primary-glow); border: 1px solid var(--color-primary);">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2" data-key="feature4-title">Knowledge Network</h3>
+                            <p class="opacity-80" data-key="feature4-desc">Explore an interconnected web of concepts, texts, and commentaries, visualized for intuitive understanding.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Demo Section --><section id="demo" class="py-20 lg:py-32">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4 scroll-reveal" style="color: var(--color-primary);" data-key="demo-title">Try the Prototype</h2>
+                    <p class="text-lg mb-12 max-w-2xl mx-auto scroll-reveal" data-key="demo-subtitle">Experience the power of VedAI. Get a live Hindi translation of any Sanskrit verse.</p>
+
+                    <div class="max-w-2xl mx-auto scroll-reveal">
+                        <div class="flex items-center gap-2 bg-transparent border-2 border-gray-700 rounded-lg focus-within:border-primary focus-within:ring-2 focus-within:ring-primary-glow transition duration-300">
+                            <input id="demo-input" type="text" placeholder="Type or speak a Sanskrit verse..." data-key="demo-placeholder" class="w-full px-5 py-3 bg-transparent border-none focus:outline-none focus:ring-0">
+                            <button id="mic-button" title="Speak Verse" class="p-3 text-gray-400 hover:text-primary transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                            </button>
+                        </div>
+                        <p id="mic-status" class="mt-4 text-lg opacity-80 h-6"></p>
+                        <button id="demo-button" class="btn btn-primary px-8 py-3 rounded-lg font-semibold mt-4 w-full sm:w-auto" data-key="translate-btn">Translate</button>
+                    </div>
+
+                    <div id="demo-output" class="mt-8 max-w-3xl mx-auto text-left glass-card p-8 hidden">
+                        <div id="loading-spinner" class="hidden mx-auto loader"></div>
+                        <div id="translation-result" class="hidden">
+                            <h4 class="font-bold text-xl mb-4" style="color: var(--color-primary);" data-key="result-title">Translation Result:</h4>
+                            <div class="space-y-4">
+                                 <p><strong class="font-semibold text-primary/80 block" data-key="result-original">Original Verse:</strong> <span id="output-verse" class="italic"></span></p>
+                                <p><strong class="font-semibold text-primary/80 block" data-key="result-translation">Hindi Translation:</strong> <span id="output-translation" class="text-lg"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section --><section id="team" class="py-20 lg:py-32" style="background-color: #111;">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-12 scroll-reveal" style="color: var(--color-primary);" data-key="team-title">Our Team</h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                        <!-- Team Member 1 (Yash) --><div class="text-center scroll-reveal">
+                            <img src="yh.jpg" alt="Yash's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 object-cover object-center" style="border-color: var(--color-primary);">
+                            <h3 class="text-xl font-bold">Yash</h3>
+                            <p class="opacity-80" data-key="yash-role">Team Leader</p>
+                        </div>
+                         <!-- Team Member 2 (Aradhana) --><div class="text-center scroll-reveal" style="transition-delay: 100ms;">
+                            <img src="ar.jpg" alt="Aradhana's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                            <h3 class="text-xl font-bold">Aradhana</h3>
+                            <p class="opacity-80" data-key="aradhana-role">Team Member</p>
+                        </div>
+                         <!-- Team Member 3 (Hasan Saifi) --><div class="text-center scroll-reveal" style="transition-delay: 200ms;">
+                            <img src="hs.jpg" alt="Hasan Saifi's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                            <h3 class="text-xl font-bold">Hasan Saifi</h3>
+                            <p class="opacity-80" data-key="hasan-role">Team Member</p>
+                        </div>
+                         <!-- Team Member 4 (Prince Kumar) --><div class="text-center scroll-reveal" style="transition-delay: 300ms;">
+                            <img src="pr.jpg" alt="Prince Kumar's Photo" class="w-40 h-40 rounded-full mx-auto mb-4 border-4" style="border-color: var(--color-primary);">
+                            <h3 class="text-xl font-bold">Prince Kumar</h3>
+                            <p class="opacity-80" data-key="prince-role">Team Member</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer --><footer id="contact" class="bg-[#151515] text-white/80 pt-10 mt-auto">
+            <!-- Top Links Bar -->
+            <div class="border-b border-gray-800">
+                <div class="container mx-auto px-6 py-2 flex justify-end items-center text-sm space-x-6">
+                    <a href="#home" class="hover:text-primary transition-colors" data-key="footer-home">Home</a>
+                    <a href="#" class="hover:text-primary transition-colors" data-key="footer-terms">Terms of Use</a>
+                    <a href="#" class="hover:text-primary transition-colors" data-key="footer-privacy">Privacy Policy</a>
+                    <a href="#" class="hover:text-primary transition-colors" data-key="footer-faq">FAQ's</a>
+                </div>
+            </div>
     
-    <!-- Music Toggle Button -->
-    <button id="music-toggle" title="Toggle Music">
-        <!-- Speaker Off Icon -->
-        <svg id="speaker-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-        <!-- Speaker On Icon -->
-        <svg id="speaker-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+            <!-- Main Footer Content -->
+            <div class="container mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Column 1: VedAI Info -->
+                <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <a href="#home" class="text-3xl font-bold mb-4" style="font-family: var(--font-heading); color: var(--color-primary);">VedAI</a>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="p-2 border border-gray-700 rounded-full hover:bg-primary hover:text-black transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" class="p-2 border border-gray-700 rounded-full hover:bg-primary hover:text-black transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="p-2 border border-gray-700 rounded-full hover:bg-primary hover:text-black transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="p-2 border border-gray-700 rounded-full hover:bg-primary hover:text-black transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"></path><polygon points="10 15 15 12 10 9"></polygon></svg></a>
+                    </div>
+                    <h4 class="font-semibold mb-2" data-key="footer-visitors">Number of Visitors</h4>
+                    <div class="flex space-x-1 text-lg font-bold tracking-widest">
+                        <span class="border border-gray-700 px-2 py-1 rounded">4</span>
+                        <span class="border border-gray-700 px-2 py-1 rounded">2</span>
+                        <span class="border border-gray-700 px-2 py-1 rounded">6</span>
+                        <span class="border border-gray-700 px-2 py-1 rounded">6</span>
+                        <span class="border border-gray-700 px-2 py-1 rounded">0</span>
+                        <span class="border border-gray-700 px-2 py-1 rounded">8</span>
+                    </div>
+                </div>
+
+                <!-- Column 2: Headquarters -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4" data-key="footer-hq">VedAI Headquarters</h3>
+                    <img src="headq.jpg" alt="VedAI Headquarters" class="rounded-md border border-gray-800">
+                </div>
+
+                <!-- Column 3: Contact Us -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4" data-key="footer-contact-us">Contact Us</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <svg class="mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>FC-26, Panduk Shila Marg, Zero Pusta Rd, Shastri Park, Shahdara, New Delhi, Delhi 110053 , india</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                           <svg class="mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                           <span>+91-9821026940</span>
+                        </div>
+                         <div class="flex items-start gap-3">
+                           <svg class="mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                           <span>yash.engineer06@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 4: Our Vision -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4" data-key="footer-vision">Our Vision</h3>
+                    <img src="vision.jpg" alt="Our Vision" class="rounded-md border border-gray-800">
+                </div>
+            </div>
+    
+            <!-- Bottom Bar -->
+            <div class="bg-black/20">
+                <div class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center text-sm">
+                    <p class="text-center sm:text-left" data-key="copyright">&copy; 2025 VedAI Project. All Rights Reserved.</p>
+                    <p class="mt-2 sm:mt-0" data-key="made-by">Made by 🌸Yash</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="fixed bottom-5 right-5 bg-primary/80 text-black p-3 rounded-full shadow-lg hidden opacity-0 hover:bg-primary transition-all duration-300 z-[80]">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 
+    <!-- Login and Register Modals -->
+    <div id="modal-overlay" class="modal-overlay fixed inset-0 bg-black/70 backdrop-blur-md z-[60] hidden opacity-0"></div>
 
-    <script>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-container fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] w-full max-w-md hidden opacity-0 scale-95">
+        <div class="relative glass-card border-2 border-primary/50">
+            <button class="close-modal-button absolute top-3 right-3 text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="p-8">
+                <h2 class="text-2xl font-bold text-center mb-6" style="color: var(--color-primary);" data-key="login-title">Sign In</h2>
+                <form id="login-form">
+                    <div class="space-y-4">
+                        <input type="email" placeholder="Email ID" data-key="email-placeholder" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        <input type="password" placeholder="Password" data-key="password-placeholder" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        
+                        <div class="flex items-center gap-4">
+                            <label for="login-captcha-input" class="font-semibold whitespace-nowrap" id="login-captcha-label">3 + 5 =</label>
+                            <input type="number" id="login-captcha-input" placeholder="?" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full btn btn-primary py-2 mt-6 rounded-md font-semibold" data-key="login-btn">Sign In</button>
+                    <p class="text-center text-sm mt-4">
+                        <span data-key="no-account">Don't have an account? </span>
+                        <a href="#" id="show-register-modal" class="font-semibold text-primary hover:underline" data-key="signup-link">Sign Up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal-container fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] w-full max-w-md hidden opacity-0 scale-95">
+         <div class="relative glass-card border-2 border-primary/50">
+            <button class="close-modal-button absolute top-3 right-3 text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="p-8">
+                <h2 class="text-2xl font-bold text-center mb-6" style="color: var(--color-primary);" data-key="register-title">Sign Up</h2>
+                <form id="register-form">
+                    <div class="space-y-4">
+                        <input type="text" placeholder="Full Name" data-key="fullname-placeholder" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        <input type="email" placeholder="Email ID" data-key="email-placeholder-reg" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        <input type="password" placeholder="Password" data-key="password-placeholder-reg" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        
+                        <div class="flex items-center gap-4">
+                            <label for="register-captcha-input" class="font-semibold whitespace-nowrap" id="register-captcha-label">7 + 2 =</label>
+                            <input type="number" id="register-captcha-input" placeholder="?" class="w-full px-4 py-2 bg-transparent border border-gray-700 rounded-md focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full btn btn-primary py-2 mt-6 rounded-md font-semibold" data-key="register-btn">Sign Up</button>
+                     <p class="text-center text-sm mt-4">
+                        <span data-key="have-account">Already have an account? </span>
+                        <a href="#" id="show-login-modal" class="font-semibold text-primary hover:underline" data-key="signin-link">Sign In</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Inlined JavaScript --><script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            // --- Translation Data and Logic ---
+            const translations = {
+                en: {
+                    'login': 'LOGIN', 'register': 'REGISTER', 'nav-home': 'Home', 'nav-about': 'About', 'nav-features': 'Features', 'nav-demo': 'Demo', 'nav-team': 'Team', 'nav-contact': 'Contact', 'nav-home-mob': 'Home', 'nav-about-mob': 'About', 'nav-features-mob': 'Features', 'nav-demo-mob': 'Demo', 'nav-team-mob': 'Team', 'nav-contact-mob': 'Contact', 'hero-title': 'Decoding Ancient Wisdom through Artificial Intelligence', 'hero-subtitle': 'Bridging timeless Vedic knowledge with modern science.', 'explore-btn': 'Explore Now', 'prototype-btn': 'Try Prototype', 'about-title': 'What is VedAI?', 'about-para': 'VedAI is a pioneering platform dedicated to unraveling the profound wisdom embedded within ancient Vedic texts using state-of-the-art Artificial Intelligence. Our mission is to create a seamless bridge between past and present, making millennia-old knowledge accessible, searchable, and understandable to scholars, students, and enthusiasts worldwide. We leverage natural language processing and machine learning to analyze texts, reveal hidden patterns, and connect ancient philosophies with contemporary scientific principles.', 'features-title': 'Core Features', 'features-subtitle': 'Empowering research and discovery through technology.', 'feature1-title': 'AI-Powered Decoding', 'feature1-desc': 'Utilize advanced algorithms to translate, interpret, and analyze complex Sanskrit verses with high accuracy.', 'feature2-title': 'Open Contribution', 'feature2-desc': 'A community-driven platform where scholars can contribute, validate, and enrich the knowledge base.', 'feature3-title': 'Modern Science Link', 'feature3-desc': 'Discover correlations between ancient concepts and modern scientific theories, from cosmology to consciousness.', 'feature4-title': 'Knowledge Network', 'feature4-desc': 'Explore an interconnected web of concepts, texts, and commentaries, visualized for intuitive understanding.', 'demo-title': 'Try the Prototype', 'demo-subtitle': 'Experience the power of VedAI. Get a live Hindi translation of any Sanskrit verse.', 'demo-placeholder': 'Type or speak a Sanskrit verse...', 'translate-btn': 'Translate', 'result-title': 'Translation Result:', 'result-original': 'Original Verse:', 'result-translation': 'Hindi Translation:', 'team-title': 'Our Team', 'yash-role': 'Team Leader', 'aradhana-role': 'Team Member', 'hasan-role': 'Team Member', 'prince-role': 'Team Member', 'copyright': '© 2025 VedAI Project. All Rights Reserved.', 'made-by': 'Made by Yash', 'login-title': 'Sign In', 'email-placeholder': 'Email ID', 'password-placeholder': 'Password', 'login-btn': 'Sign In', 'no-account': "Don't have an account? ", 'signup-link': 'Sign Up', 'register-title': 'Sign Up', 'fullname-placeholder': 'Full Name', 'email-placeholder-reg': 'Email ID', 'password-placeholder-reg': 'Password', 'register-btn': 'Sign Up', 'have-account': 'Already have an account? ', 'signin-link': 'Sign In',
+                    'footer-home': 'Home', 'footer-terms': 'Terms of Use', 'footer-privacy': 'Privacy Policy', 'footer-faq': "FAQ's", 'footer-visitors': 'Number of Visitors', 'footer-hq': 'VedAI Headquarters', 'footer-contact-us': 'Contact Us', 'footer-vision': 'Our Vision'
+                },
+                hi: {
+                    'login': 'लॉग इन करें', 'register': 'पंजीकरण करें', 'nav-home': 'होम', 'nav-about': 'परिचय', 'nav-features': 'विशेषताएँ', 'nav-demo': 'डेमो', 'nav-team': 'टीम', 'nav-contact': 'संपर्क', 'nav-home-mob': 'होम', 'nav-about-mob': 'परिचय', 'nav-features-mob': 'विशेषताएँ', 'nav-demo-mob': 'डेमो', 'nav-team-mob': 'टीम', 'nav-contact-mob': 'संपर्क', 'hero-title': 'आर्टिफिशियल इंटेलिजेंस के माध्यम से प्राचीन ज्ञान को डिकोड करना', 'hero-subtitle': 'सनातन वैदिक ज्ञान को आधुनिक विज्ञान से जोड़ना।', 'explore-btn': 'अभी अन्वेषण करें', 'prototype-btn': 'प्रोटोटाइप आज़माएँ', 'about-title': 'वेद AI क्या है?', 'about-para': 'वेद AI एक अग्रणी मंच है जो अत्याधुनिक आर्टिफिशियल इंटेलिजेंस का उपयोग करके प्राचीन वैदिक ग्रंथों में निहित गहन ज्ञान को उजागर करने के लिए समर्पित है। हमारा मिशन अतीत और वर्तमान के बीच एक सहज पुल बनाना है, जिससे सहस्राब्दी पुराने ज्ञान को दुनिया भर के विद्वानों, छात्रों और उत्साही लोगों के लिए सुलभ, खोजने योग्य और समझने योग्य बनाया जा सके। हम ग्रंथों का विश्लेषण करने, छिपे हुए पैटर्न को प्रकट करने और प्राचीन दर्शन को समकालीन वैज्ञानिक सिद्धांतों से जोड़ने के लिए प्राकृतिक भाषा प्रसंस्करण और मशीन लर्निंग का लाभ उठाते हैं।', 'features-title': 'मुख्य विशेषताएँ', 'features-subtitle': 'प्रौद्योगिकी के माध्यम से अनुसंधान और खोज को सशक्त बनाना।', 'feature1-title': 'एआई-संचालित डिकोडिंग', 'feature1-desc': 'जटिल संस्कृत श्लोकों का उच्च सटीकता के साथ अनुवाद, व्याख्या और विश्लेषण करने के लिए उन्नत एल्गोरिदम का उपयोग करें।', 'feature2-title': 'खुला योगदान', 'feature2-desc': 'एक समुदाय-संचालित मंच जहां विद्वान ज्ञान के आधार में योगदान, सत्यापन और उसे समृद्ध कर सकते हैं।', 'feature3-title': 'आधुनिक विज्ञान लिंक', 'feature3-desc': 'ब्रह्मांड विज्ञान से लेकर चेतना तक, प्राचीन अवधारणाओं और आधुनिक वैज्ञानिक सिद्धांतों के बीच संबंध खोजें।', 'feature4-title': 'ज्ञान नेटवर्क', 'feature4-desc': 'सहज समझ के लिए कल्पना की गई अवधारणाओं, ग्रंथों और टिप्पणियों के एक परस्पर जुड़े वेब का अन्वेषण करें।', 'demo-title': 'प्रोटोटाइप आज़माएँ', 'demo-subtitle': 'वेद AI की शक्ति का अनुभव करें। किसी भी संस्कृत श्लोक का लाइव हिंदी अनुवाद प्राप्त करें।', 'demo-placeholder': 'कोई संस्कृत श्लोक टाइप करें या बोलें...', 'translate-btn': 'अनुवाद करें', 'result-title': 'अनुवाद परिणाम:', 'result-original': 'मूल श्लोक:', 'result-translation': 'हिंदी अनुवाद:', 'team-title': 'हमारी टीम', 'yash-role': 'टीम लीडर', 'aradhana-role': 'टीम सदस्य', 'hasan-role': 'टीम सदस्य', 'prince-role': 'टीम सदस्य', 'copyright': '© 2025 वेद AI प्रोजेक्ट। सर्वाधिकार सुरक्षित।', 'made-by': 'यश द्वारा निर्मित', 'login-title': 'साइन इन करें', 'email-placeholder': 'ईमेल आईडी', 'password-placeholder': 'पासवर्ड', 'login-btn': 'साइन इन करें', 'no-account': 'खाता नहीं है? ', 'signup-link': 'साइन अप करें', 'register-title': 'साइन अप करें', 'fullname-placeholder': 'पूरा नाम', 'email-placeholder-reg': 'ईमेल आईडी', 'password-placeholder-reg': 'पासवर्ड', 'register-btn': 'साइन अप करें', 'have-account': 'पहले से ही एक खाता मौजूद है? ', 'signin-link': 'साइन इन करें',
+                    'footer-home': 'होम', 'footer-terms': 'उपयोग की शर्तें', 'footer-privacy': 'गोपनीयता नीति', 'footer-faq': 'पूछे जाने वाले प्रश्न', 'footer-visitors': 'आगंतुकों की संख्या', 'footer-hq': 'वेद AI मुख्यालय', 'footer-contact-us': 'हमसे संपर्क करें', 'footer-vision': 'हमारी दृष्टि'
+                },
+                sa: {
+                    'login': 'प्रविशतु', 'register': 'पञ्जीकरणं करोतु', 'nav-home': 'गृहम्', 'nav-about': 'विषये', 'nav-features': 'वैशिष्ट्यानि', 'nav-demo': 'प्रदर्शनम्', 'nav-team': 'गणः', 'nav-contact': 'सम्पर्कः', 'nav-home-mob': 'गृहम्', 'nav-about-mob': 'विषये', 'nav-features-mob': 'वैशिष्ट्यानि', 'nav-demo-mob': 'प्रदर्शनम्', 'nav-team-mob': 'गणः', 'nav-contact-mob': 'सम्पर्कः', 'hero-title': 'कृत्रिमप्रज्ञया प्राचीनज्ञानस्य गूढार्थानुसन्धानम्', 'hero-subtitle': 'कालातीतवैदिकज्ञानस्य आधुनिकविज्ञानेन सह संयोजनम्।', 'explore-btn': 'अन्वेषणं करोतु', 'prototype-btn': 'प्रतिरूपं प्रयुङ्क्ष्व', 'about-title': 'वेद AI किम् अस्ति?', 'about-para': 'वेद AI एकम् अग्रगण्यं मञ्चम् अस्ति यत् अत्याधुनिककृत्रिमप्रज्ञायाः उपयोगेन प्राचीनवैदिकग्रन्थेषु निहितस्य गहनज्ञानस्य अनावरणाय समर्पितम् अस्ति। अस्माकं लक्ष्यं भूत-वर्तमानयोः मध्ये एकं सुगमं सेतुं निर्मातुम् अस्ति, येन सहस्राब्दपुरातनं ज्ञानं विश्वस्य विद्वद्भ्यः, छात्रेभ्यः, उत्साहिभ्यः च सुलभं, अन्वेषणीयं, बोधगम्यं च भवेत्। वयं ग्रन्थानां विश्लेषणार्थं, गुप्तस्वरूपाणां प्रकटीकरणार्थं, प्राचीनदर्शनानां समकालीनवैज्ञानिकसिद्धान्तैः सह संयोजनार्थं च नैसर्गिकभाषाप्रसंस्करणस्य मशीन-लर्निंग-इत्यस्य च लाभं स्वीकुर्मः।', 'features-title': 'मुख्य वैशिष्ट्यानि', 'features-subtitle': 'तन्त्रज्ञानेन अनुसन्धानं आविष्कारं च सशक्तीकरणम्।', 'feature1-title': 'एआई-शक्तिचालितः गूढार्थानुसन्धानम्', 'feature1-desc': 'जटिलसंस्कृतश्लोकानाम् उच्चसटीकतया अनुवादं, व्याख्यां, विश्लेषणं च कर्तुम् उन्नत-एल्गोरिदम-इत्यस्य उपयोगं कुर्वन्तु।', 'feature2-title': 'मुक्तं योगदानम्', 'feature2-desc': 'एकं समुदाय-चालितं मञ्चं यत्र विद्वांसः ज्ञानकोशे योगदानं, प्रमाणीकरणं, समृद्धिं च कर्तुं शक्नुवन्ति।', 'feature3-title': 'आधुनिकविज्ञान-सम्बन्धः', 'feature3-desc': 'ब्रह्माण्डविज्ञानात् आरभ्य चेतनापर्यन्तं प्राचीनसंकल्पनानां आधुनिकवैज्ञानिकसिद्धान्तानां च मध्ये सम्बन्धम् अन्वेषयन्तु।', 'feature4-title': 'ज्ञान-जालम्', 'feature4-desc': 'सहजबोधाय परिकल्पितानां संकल्पनानां, ग्रन्थानां, भाष्यणां च परस्परसम्बद्धजालम् अन्वेषयन्तु।', 'demo-title': 'प्रतिरूपं प्रयुङ्क्ष्व', 'demo-subtitle': 'वेद AI इत्यस्य शक्तिम् अनुभवतु। कस्यापि संस्कृतश्लोकस्य प्रत्यक्षं हिन्दी-अनुवादं प्राप्नुवन्तु।', 'demo-placeholder': 'संस्कृतश्लोकं लिखतु वा वदतु...', 'translate-btn': 'अनुवादं करोतु', 'result-title': 'अनुवादस्य परिणामः', 'result-original': 'मूलश्लोकः', 'result-translation': 'हिन्दी-अनुवादः', 'team-title': 'अस्माकं गणः', 'yash-role': 'गणनायकः', 'aradhana-role': 'गणसदस्यः', 'hasan-role': 'गणसदस्यः', 'prince-role': 'गणसदस्यः', 'copyright': '© 2025 वेद AI प्रकल्पः। सर्वे अधिकाराः सुरक्षिताः।', 'made-by': 'यशेन निर्मितम्', 'login-title': 'प्रविशतु', 'email-placeholder': 'ईमेल आईडी', 'password-placeholder': 'कूटशब्दः', 'login-btn': 'प्रविशतु', 'no-account': 'अकाउंट् नास्ति? ', 'signup-link': 'पञ्जीकरणं करोतु', 'register-title': 'पञ्जीकरणं करोतु', 'fullname-placeholder': 'पूर्णं नाम', 'email-placeholder-reg': 'ईमेल आईडी', 'password-placeholder-reg': 'कूटशब्दः', 'register-btn': 'पञ्जीकरणं करोतु', 'have-account': 'पूर्वमेव अकाउंट् अस्ति? ', 'signin-link': 'प्रविशतु',
+                    'footer-home': 'गृहम्', 'footer-terms': 'उपयोगस्य नियमाः', 'footer-privacy': 'गोपनीयतानीतिः', 'footer-faq': 'प्रश्नोत्तराणि', 'footer-visitors': 'आगन्तुकानां संख्या', 'footer-hq': 'वेद AI मुख्यालयः', 'footer-contact-us': 'अस्मान् सम्पर्कयन्तु', 'footer-vision': 'अस्माकं दृष्टिः'
+                }
+            };
+
+            const languageSelector = document.getElementById('language-selector-button');
+            const selectedLanguageText = document.getElementById('selected-language-text');
+            const languageOptionsContainer = document.getElementById('language-options');
+            const languageOptions = document.querySelectorAll('#language-options a');
+
+            function setLanguage(lang) {
+                document.documentElement.lang = lang;
+                const langData = translations[lang];
+                document.querySelectorAll('[data-key]').forEach(element => {
+                    const key = element.getAttribute('data-key');
+                    if (langData[key]) {
+                        if (element.hasAttribute('placeholder')) {
+                            element.placeholder = langData[key];
+                        } else {
+                            element.textContent = langData[key];
+                        }
+                    }
+                });
+                // Update language selector button text
+                const selectedOption = document.querySelector(`#language-options a[data-lang="${lang}"]`);
+                if(selectedOption) {
+                    selectedLanguageText.textContent = selectedOption.textContent;
+                }
+            }
+            
+            languageOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = option.getAttribute('data-lang');
+                    setLanguage(lang);
+                    languageOptionsContainer.classList.add('hidden'); // Close dropdown after selection
+                });
+            });
+            
+            // --- Language Selector Click Logic ---
+            languageSelector.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent window click from closing it immediately
+                languageOptionsContainer.classList.toggle('hidden');
+            });
+
+            // Close dropdown if clicked outside
+            window.addEventListener('click', (e) => {
+                if (!languageSelector.contains(e.target)) {
+                    languageOptionsContainer.classList.add('hidden');
+                }
+            });
+
+
+            // Set default language on load
+            setLanguage('en');
+
             // --- Logo Refresh on Click ---
             const logoLink = document.getElementById('logo-link');
             logoLink.addEventListener('click', function (event) {
@@ -454,14 +703,14 @@
             });
             
             // --- Navbar scroll effect ---
-            const header = document.querySelector('header');
+            const mainHeader = document.getElementById('main-header');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
-                    header.style.backgroundColor = 'rgba(27, 27, 27, 0.8)';
-                    header.style.backdropFilter = 'blur(10px)';
+                    mainHeader.style.backgroundColor = 'rgba(27, 27, 27, 0.8)';
+                    mainHeader.style.backdropFilter = 'blur(10px)';
                 } else {
-                    header.style.backgroundColor = 'transparent';
-                    header.style.backdropFilter = 'none';
+                    mainHeader.style.backgroundColor = 'transparent';
+                    mainHeader.style.backdropFilter = 'none';
                 }
             });
             
@@ -570,44 +819,162 @@
             }
 
             // --- Background Music Logic ---
-            const musicToggle = document.getElementById('music-toggle');
-            const speakerOn = document.getElementById('speaker-on');
-            const speakerOff = document.getElementById('speaker-off');
             const chantAudio = document.getElementById('background-chant');
+            chantAudio.play().catch(error => {
+                console.log("Autoplay was prevented. A user interaction is required to start the audio.", error);
+                document.body.addEventListener('click', () => {
+                    chantAudio.play();
+                }, { once: true });
+            });
 
-            const playAudio = async () => {
-                // Check if audio is already playing to avoid interruption errors
-                if (chantAudio.paused) {
-                    try {
-                        await chantAudio.play();
-                        speakerOn.classList.remove('hidden');
-                        speakerOff.classList.add('hidden');
-                    } catch (err) {
-                        // This error is expected if autoplay is blocked
-                        console.log("Autoplay was prevented. User must interact to start audio.", err);
-                        speakerOn.classList.add('hidden');
-                        speakerOff.classList.remove('hidden');
-                    }
+            // --- Login/Register Modal Logic ---
+            const modalOverlay = document.getElementById('modal-overlay');
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+
+            const loginButton = document.getElementById('login-button');
+            const registerButton = document.getElementById('register-button');
+
+            const closeButtons = document.querySelectorAll('.close-modal-button');
+
+            let captchaAnswer = 0;
+
+            function generateCaptcha(modalType) {
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                captchaAnswer = num1 + num2;
+                document.getElementById(`${modalType}-captcha-label`).textContent = `${num1} + ${num2} =`;
+                document.getElementById(`${modalType}-captcha-input`).value = '';
+            }
+
+            function openModal(modal) {
+                modalOverlay.classList.remove('hidden');
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modal.classList.remove('opacity-0', 'scale-95');
+                }, 10);
+            }
+
+            function closeModal(modal) {
+                modalOverlay.classList.add('opacity-0');
+                modal.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    modalOverlay.classList.add('hidden');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+            
+            loginButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                generateCaptcha('login');
+                openModal(loginModal);
+            });
+            
+            registerButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                generateCaptcha('register');
+                openModal(registerModal);
+            });
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    closeModal(loginModal);
+                    closeModal(registerModal);
+                });
+            });
+
+            modalOverlay.addEventListener('click', () => {
+                 closeModal(loginModal);
+                 closeModal(registerModal);
+            });
+            
+            document.body.addEventListener('click', (e) => {
+                if(e.target && e.target.closest('#show-register-modal')) {
+                    e.preventDefault();
+                    closeModal(loginModal);
+                    generateCaptcha('register');
+                    openModal(registerModal);
                 }
-            };
-
-            const pauseAudio = () => {
-                chantAudio.pause();
-                speakerOn.classList.add('hidden');
-                speakerOff.classList.remove('hidden');
-            };
-
-            musicToggle.addEventListener('click', () => {
-                if (chantAudio.paused) {
-                    playAudio();
+                if(e.target && e.target.closest('#show-login-modal')) {
+                    e.preventDefault();
+                    closeModal(registerModal);
+                    generateCaptcha('login');
+                    openModal(loginModal);
+                }
+            });
+            
+            // Form submission handlers
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userAnswer = parseInt(document.getElementById('login-captcha-input').value, 10);
+                if (userAnswer === captchaAnswer) {
+                    alert('Login successful! (This is a demo)');
+                    closeModal(loginModal);
                 } else {
-                    pauseAudio();
+                    alert('Incorrect CAPTCHA. Please try again.');
+                    generateCaptcha('login');
                 }
             });
 
-            // We no longer attempt to autoplay here, as it's unreliable.
-            // The user must click the toggle button to start the music.
-            // So we remove the line: playAudio();
+            document.getElementById('register-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userAnswer = parseInt(document.getElementById('register-captcha-input').value, 10);
+                if (userAnswer === captchaAnswer) {
+                    alert('Registration successful! (This is a demo)');
+                    closeModal(registerModal);
+                } else {
+                    alert('Incorrect CAPTCHA. Please try again.');
+                    generateCaptcha('register');
+                }
+            });
+
+            // --- Custom Cursor Logic ---
+            const cursorDot = document.getElementById('custom-cursor-dot');
+            const cursorOutline = document.getElementById('custom-cursor-outline');
+
+            window.addEventListener('mousemove', function(e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            const hoverables = document.querySelectorAll('a, button, input[type="submit"], input[type="button"], .nav-link');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseover', () => {
+                    cursorOutline.classList.add('hover');
+                    cursorDot.classList.add('hover');
+                });
+                el.addEventListener('mouseout', () => {
+                    cursorOutline.classList.remove('hover');
+                    cursorDot.classList.remove('hover');
+                });
+            });
+            
+            // --- Scroll to Top Button Logic ---
+            const scrollToTopButton = document.getElementById('scroll-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopButton.classList.remove('hidden');
+                    setTimeout(() => scrollToTopButton.classList.remove('opacity-0'), 10);
+                } else {
+                    scrollToTopButton.classList.add('opacity-0');
+                    setTimeout(() => scrollToTopButton.classList.add('hidden'), 300);
+                }
+            });
+            scrollToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
 
 
             // --- Hero Canvas Animation ---
@@ -629,7 +996,7 @@
                     this.size = Math.random() * 1.5 + 0.5;
                     this.speedX = Math.random() * 1 - 0.5;
                     this.speedY = Math.random() * 1 - 0.5;
-                    this.color = '#c49b3a';
+                    this.color = '#c49b3a'; // Reverted to old primary color
                 }
                 update() {
                     this.x += this.speedX;
@@ -666,7 +1033,7 @@
 
                         if (distance < 100) {
                             opacityValue = 1 - (distance / 100);
-                            ctx.strokeStyle = 'rgba(196, 155, 58, ' + opacityValue + ')';
+                            ctx.strokeStyle = 'rgba(196, 155, 58, ' + opacityValue + ')'; // Reverted to old primary color
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
@@ -678,6 +1045,7 @@
             }
 
             function animate() {
+                if(!ctx) return; // Add a guard clause
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => {
                     p.update();
@@ -692,6 +1060,4 @@
 
 </body>
 </html>
-
-
 
